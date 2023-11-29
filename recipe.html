@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/echpochmaksmol.png" type="image/x-icon">
+    <title>Фанклуб эчпочмака</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+    }
+    h1 {
+      font-size: 50px;
+      font-family: "Nunito", sans-serif;
+    }
+    h2 {
+      font-family: "Nunito", sans-serif;
+    }
+    h3 {
+      font-family: "Nunito", sans-serif;
+    }
+    h6 {
+      margin: 5px;
+    }
+    p {
+      font-family: "Rubik", sans-serif;
+      font-size: 17px;
+    }
+    li {
+      font-family: "Rubik", sans-serif;
+    }
+    a {
+      color: #724c29;
+    }
+    body {
+      margin: 0;
+      background-color: #ffe4b5;
+    }
+    hr {
+      border-style: dashed;
+      border-color: #976f4a;
+    }
+    main {
+      padding: 0 20px;
+      background-color: #ffeed0;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      flex: 1 0 auto;
+      margin: 10px auto;
+      width: 55%;
+      border-radius: 10px;
+    }
+    footer {
+      font-family: "Rubik", sans-serif;
+      background-color: #48332c;
+      color: #fff;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      height: 45px;
+    }
+    
+    footer a{
+      color:#e2964f
+    }
+    img {
+      width: 200px;
+      border-radius: 15%;
+    }
+    .banner {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        var(--bg-url);
+      background-repeat: no-repeat;
+      background-size: 100%, cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      > * {
+        color: #fff;
+      }
+    }
+    aside {
+      clear: left;
+      float: left;
+      width: 20%;
+    }
+    p.ad {
+      font-size: 10px;
+      width: 90%;
+      margin-top: 1px;
+    }
+    h1.ad {
+      font-size: 16px;
+      width: 90%;
+      margin-top: 1px;
+    }
+    .logo {
+      width: 70px;
+      padding-right: 10px;
+    }
+    .menu-background {
+      padding-top: 15px;
+      background-size: cover;
+      background-color: #f5d9aa;
+      padding-right: 10;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #724c29;
+    }
+    .menu {
+      justify-content: center;
+      display: flex;
+    }
+    .menu-button {
+      margin-right: 30px;
+      width: auto;
+    }
+    .menu-button :hover {
+      background-color: #f5b67c;
+      border-radius: 15%;
+      transition: background-color 400ms linear;
+    }
+    .menu-text {
+      font-family: "Nunito";
+      font-size: 25px;
+      text-decoration: none;
+    }
+    .menu-text-selected {
+      color:#36210d;
+      font-family: "Nunito";
+      font-size: 25px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .auth-button {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      margin-top: 215px;
+      margin-right: 20px;
+      width: 38px;
+    }
+    .login-pic {
+      width: 30px;
+    }
+    .login-button {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+    .modal_body li:first-child{
+      list-style-image:url(assets/log.png);
+    }
+    .modal_body li:first-child + li{
+      list-style-image:url(assets/reg.png);
+    }
+    .modal_body a {
+      text-decoration: none;
+      color: #000000;
+    }
+    .center {
+      text-align: center;
+    }
+    .card {
+      margin: 20px;
+      background-color: #ffeed0;
+      width: 200px;
+    }
+    .card-row {
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      padding-right: 10;
+      padding-bottom: 15px;
+    }
+    .modal {
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+    .modal_bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+    .modal-state {
+      display: none;
+    }
+    .modal-state:checked + .modal {
+      visibility: visible;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .modal-state:checked + .modal .modal_body {
+      top: 0;
+    }
+    .modal_body {
+      position: absolute;
+      top: 15px;
+      bottom: 300px;
+      right: 20px;
+      width: 250px;
+      height: 90px;
+      margin: auto;
+      overflow: auto;
+      background-color: #ffe4b5;
+      padding-left: 5px;
+      border: 2px solid #724c29;
+      border-radius: 5px;
+    }
+    aside {
+      clear: left;
+      float: left;
+      width: 10%;
+    }
+    .aside {
+      clear: right;
+     float: right;
+     margin-top: 1000px;
+      width: 10%;
+    }
+    p.ad {
+      font-family: Roboto;
+      font-size: 10px;
+      width: 90%;
+      margin-top: 1px;
+      padding-bottom: 7px;
+      padding-left: 10px;
+    }
+    h1.ad {
+      font-family: Roboto;
+      font-size: 16px;
+      width: 90%;
+      margin-top: 1px;
+      padding-left: 10px;
+    }
+  </style>
+  <body>
+    <header>
+      <div
+        class="banner"
+        style="
+          --bg-url: url('https://kartinkof.club/uploads/posts/2023-05/1683365159_kartinkof-club-p-ochpochmak-kartinki-22.jpg');
+        "
+      >
+      <a href="/index.html">
+        <img
+          class="logo"
+          align="left"
+          src="assets/echpochmak.png"
+          alt=""
+        />
+      </a>
+      <a href="/index.html" style="text-decoration: none;">
+        <h1>Фанклуб эчпочмака</h1>
+      </a>
+      </div>
+    </header>
+    <div class="menu-background">
+      <div class="menu">
+        <div class="menu-button">
+          <a href="/index.html" class="menu-text"> О нас </a>
+        </div>
+        <div class="menu-button">
+          <a href="/recipe.html" class="menu-text-selected""> Рецепт </a>
+        </div>
+        <div class="menu-button">
+          <a href="/discussion.html" class="menu-text"> Обсуждение </a>
+        </div>
+      </div>
+      <label for="modal">
+          <img class="auth-button" style="cursor:pointer" src="assets/auth.png">
+      </label>
+      <input type="checkbox" id="modal" class="modal-state"/>
+      <div class="modal">
+        <label class="modal_bg" for="modal"></label>
+        <div class="modal_body">
+          <ul>
+            <li>
+              <a href="/auth.html">Войти</a>
+            </li>
+            <li>
+              <a href="/auth.html">Зарегистрироваться</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="left-sidebar">
+      <div class="ad-content">
+        
+      </div>
+    </div>
+    
+    <div class="right-sidebar">
+      <div class="ad-content">
+        
+      </div>
+    </div>
+    <!-- <aside>
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="text-align: center; color: black; text-decoration: none">
+        <div style="margin: 45% auto; background-color: #fff;">
+          <img style="width: 90%; padding-top: 2px; border-radius: 0;" src="assets/ad.jpg" />
+          <h1 class="ad">Здесь могла быть ваша реклама...</h1>
+          <p class="ad">
+            ...но пока здесь находится только рикролл
+          </p>
+        </div>
+      </a>
+    </aside>
+    <div class="aside">
+      <a href="http://c93971cu.beget.tech" style="text-align: center; color: black; text-decoration: none">
+        <div style="margin: 45% auto; background-color: #fff;">
+          <img style="width: 90%; padding-top: 2px; border-radius: 0;" src="assets/pizza.jpg" />
+          <h1 class="ad">Эта вегетарианская пицца просто огонь!</h1>
+          <p class="ad">
+            что бы сделать этот шедевр, нужно просто...
+          </p>
+        </div>
+      </a>
+    </div> -->
+    <main>
+      <div>
+      <h2 class="center">- Рецепт эчпочмаков -</h2>
+      <hr />
+      <h2 class="center">Ингредиенты:</h2>
+      <div class="card-row">
+        <div>
+          <h3 class="center">Дрожжевое тесто</h3>
+          <ul>
+            <li>Дрожжи - 6 г</li>
+            <li>Молоко теплое - 450 мл</li>
+            <li>Растительное масло - 1 ст.л.</li>
+            <li>Масло сливочное - 50 г</li>
+            <li>Яйцо - 2 шт.</li>
+            <li>Соль - 1 ч.л.</li>
+            <li>Сахар - 1 ст.л.</li>
+            <li>Мука - 850 г</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="center">Начинка</h3>
+          <ul>
+            <li>Телятина - 500 г (можно любое мясо)</li>
+            <li>Картофель - 350 г</li>
+            <li>Лук - 200 г</li>
+            <li>Соль - по вкусу</li>
+            <li>Перец черный молотый - по вкусу</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="center">Бульон</h3>
+          <ul>
+            <li>Бульон мясной - 100 мл</li>
+            <li>Масло сливочное - 50 г</li>
+            <li>Соль - по вкусу</li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <h2 class="center">Пошаговое приготовление</h2>
+      <p class="center">Время приготовления: 3 ч. 0 мин</p>
+      <div class="card-row">
+        <div class="card">
+          <h3 class="center">ШАГ 1:</h3>
+          <img
+            src="https://img.povar.ru/uploads/48/0d/3c/27/echpochmak_po-tatarski-108177.jpg"
+            alt=""
+          />
+          <p>
+            Готовим тесто: в муку добавить соль, сахар, дрожжи и перемешать,
+            сделать углубление в центре и добавить растительное масло, 2 яйца,
+            растопленное сливочное масло и теплое молоко, замесить однородное
+            тесто и поставить в теплое место на 1,5 часа.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 2:</h3>
+          <img
+            src="https://img.povar.ru/uploads/6f/c4/a2/05/echpochmak_po-tatarski-108181.jpg"
+            alt=""
+          />
+          <p>
+            Готовим начинку: мясо и картофель нарезать маленькими кубиками,
+            размером 5-6 мм, лук нарезать очень мелко.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 3:</h3>
+          <img
+            src="https://img.povar.ru/uploads/98/a5/b4/5b/echpochmak_po-tatarski-108185.jpg"
+            alt=""
+          />
+          <p>
+            Взять тесто, раскатать жгут и разрезать его на одинаковые кусочки,
+            раскатать из каждого кусочка круг диаметром 12-13 см.
+          </p>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card">
+          <h3 class="center">ШАГ 4:</h3>
+          <img
+            src="https://img.povar.ru/uploads/d0/de/a0/a2/echpochmak_po-tatarski-108188.jpg"
+            alt=""
+          />
+          <p>
+            Положить на каждый круг 1,5 ст.л. начинки и защипать в форме
+            треугольников, оставив небольшое отверстие в центре, защипывать
+            необходимо тщательно, чтобы швы во время выпекания не разошлись.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 5:</h3>
+          <img
+            src="https://img.povar.ru/uploads/38/66/ff/31/echpochmak_po-tatarski-108189.jpg"
+            alt=""
+          />
+          <p>
+            Подготовленные эчпочмаки выкладываем на противень, покрытый
+            пекарской бумагой смазанной растительным маслом, накрываем эчпочмаки
+            полотенцем и оставляем на 10-15 минут отдохнуть, тесто поднимется и
+            эчпочмаки немного увеличатся в размере.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 6:</h3>
+          <img
+            src="https://img1.russianfood.com/dycontent/images_upl/108/big_107811.jpg"
+            alt=""
+          />
+          <p>
+            Через 15 минут, каждый пирог смазываем растопленным сливочным
+            маслом.
+          </p>
+        </div>
+      </div>
+      <div class="card-row">
+        <div class="card">
+          <h3 class="center">ШАГ 7:</h3>
+          <img
+          src="https://hudsonlife.ru/wp-content/uploads/2021/01/image-61-1536x1152.png""
+          />
+          <p>
+            Разогреваем духовку до 180°С и ставим в нее противень с эчпочмаками
+            на 25 минут, выпекаем при той же температуре.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 8:</h3>
+          <img
+            src="https://img.povar.ru/uploads/fa/4f/68/7e/echpochmak_po-tatarski-108190.jpg"
+            alt=""
+          />
+          <p>
+            Через 25 минут противень вынимаем из духовки и в отверстие каждого
+            эчпочмака наливаем 2 ч.л. бульона со сливочным маслом. Вновь
+            смазываем сливочным маслом и ставим противень с эчпочмаками в
+            духовку еще на 25 минут. Внимание! Выпекаем при температуре 170°С.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="center">ШАГ 9:</h3>
+          <img
+            src="https://img.povar.ru/main-micro/6d/dd/44/2c/echpochmak_po-tatarski-108191.jpg"
+            alt=""
+          />
+          <p>
+            Готовые эчпочмаки вынимаем из духовки смазываем их сливочным маслом,
+            накрываем плотным полотенцем и даем постоять 10 минут, чтобы тесто
+            стало мягким. Эчпочмаки готовы. Приятного аппетита!
+          </p>
+        </div>
+      </div>
+      </div>
+    </main>
+    <footer>
+        <h6>©2023 recollection | </h6>
+        <a href="https://t.me/fooled_shepherd">
+          <img src="assets/telegram.svg" style="width: 16px"/>
+        </a>
+        <h6>
+          Информация взята с сайта:
+          <a
+            href="https://pikabu.ru/story/yechpochmak_tatarskaya_kukhnya_6008641"
+            >pikabu</a
+          >
+        </h6>
+    </footer>
+  </body>
+</html>
